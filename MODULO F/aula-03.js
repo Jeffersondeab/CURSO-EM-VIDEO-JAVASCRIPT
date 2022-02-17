@@ -12,7 +12,7 @@ console.log(`O primeiro valor do vetor é ${num[0]}`)
  */
 
 
-/* Suponha que o número posto no indeOf não existe na lista
+/* Suponha que o número posto no indexOf não existe na lista
 acima, quando executado irá aparecer o -1, que quer dizer
 número não encontrado. Para deixar o aspeto melhor foi 
 feito a estrutura a baixo, que diz que caso o número 

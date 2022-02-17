@@ -23,7 +23,7 @@
     section{
         background-color: white;
         width: 80vh;
-        height: 50vh;
+        height: auto;
         border-radius: 5px;
         margin: auto;
         padding: 15px;
@@ -54,7 +54,7 @@
             
             </select>
 
-            <br><input type="button" value="Finalizar"> 
+            <br><input type="button" value="Finalizar" onclick="finalizar()"> 
         </div>
 
         <div id="res"></div>
@@ -75,10 +75,13 @@
         let num = document.querySelector('input#fnum')
         let lista = document.querySelector('select#flista')
         let res = document.querySelector('div#res')
+        /* É ATRÁVES O VALORES = [] QUE É UM VETOR, QUE 
+        ELE FOI USADO PARA CALCULAR OS DADOS */
         let valores = []
 
+        /* ISNUMERO ELE FOI CRIADO, ASSIM COMO ILISTA */
         function isNumero (n){
-            if (Number (n) >= 1 && Number(n) <= 100){
+            if (Number (n) >= 1 && Number(n) <= 1000){
                 return true
             }else{
                 return false
@@ -94,12 +97,63 @@
             }
         }
 
+
+        /* A ESCLAMAÇÃO SIGNIFICA NÃO. NESSE CASO QUER DIZER
+        QUE NÃO ESTA NA LISTA. 
+        SE TIVER O NÚMERO NA LISTA ELE VAI PRO ELSE, SE NÃO TIVER 
+        NA LISTA AINDA ELE FICA NO IF */
         function adicionar(){
         if (isNumero(num.value) && !inLista(num.value, valores)){
-            window.alert('tudo ok')
+            /* EM VALORES.PUSH(NUMBER(NUM.VALUE)) ELE QUER DIZER QUE,
+            ELE VAI ADICIONAR NO VETOR VALORES.PUSH, QUE ESTA DENTRO DE NUMBER(NUM.VALUE)*/
+            valores.push(Number(num.value))
+            let item = document.createElement('option')
+            item.text = `Valor ${num.value} adicionado`
+            lista.appendChild(item)
+            /* ESSE RES.INNERHTML ELE SERVE AQUI PARA A SEGUINTE FUNÇÃO.
+            QUANDO EU FOR ADICIONAR NOVOS VALORES O TEXTO ABAIXO DE FINALIZAR
+            VAI DESAPARECER PARA QUE QUANDO EU CLICAR NOVAMENTE APAREÇA
+            UM NOVO RESULTADO. ASSIM QUE EU DIGITAR E O NÚMERO E CLICAR 
+            ADICIONAR ELE VAI DESEPARECER */
+            res.innerHTML = ''
         }else{
             window.alert('Valor inválido ou já encontrado na lista')
         }
+        /* EM NUM.VALUE = '' ELE VAI APAGAR OU DEIXAR M BRANCO
+        O CAMPO PARA COLOCAR OS NÚMEROS. E O NUM.FOCUS ELE VAI JÁ
+        FICAR PREPARADO PARA SER DIGITADO OUTRO NÚMERO */
+        num.value = ''
+        num.focus()
+    }
+
+    function finalizar(){
+        if (valores.length == 0){
+            window.alert('Adicionar valores antes de finalizar!')
+        }else{
+            /* LET TOT = VALORES.LENGTH VAI VER QUANTOS VALORES FORAM 
+            ADICIONADO */
+            let tot = valores.length
+
+            let maior = valores[0]
+            let menor = valores[0]
+            let soma = 0 
+            let media = 0
+            for(let pos in valores){
+                soma += valores[pos]
+                if (valores[pos] > maior)
+                    maior = valores[pos]
+                if(valores[pos] < menor)
+                    menor = valores[pos]
+            }
+            media = soma / tot
+            res.innerHTML = ''
+            res.innerHTML += `<p> Ao todo, temos ${tot} números cadastrados. </p>`
+            res.innerHTML += `<p> O maior valor informado foi ${maior}</p>`
+            res.innerHTML += `<p> O menor valor informado foi ${menor}</p>`
+            res.innerHTML += `<p>Somando todos os valores , temos ${soma}.</p>`
+            res.innerHTML += `A média dos valore digitados é ${media}</p>`
+        }
+         
     }
 
     </script>
