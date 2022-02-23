@@ -9,7 +9,7 @@ function parimpar(n){
 /* FUNÇÃO PARA SABER SE É IMPAR OU PAR. ABAIXO, NO NÚMERO 
 QUANDO É TROCADO, E EXECUTADO CLICANDO F8 ELE MOSTRA SE
 É IMPAR OU PAR */
-console.log(parimpar(10))
+console.log(parimpar(5))
  
  /* OU LET RES = PARIMPAR(10)
     CONSOLE.LOG(RES) */
